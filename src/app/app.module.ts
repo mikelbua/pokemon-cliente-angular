@@ -7,11 +7,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PokemonComponent } from './paginas/pokemon/pokemon.component';
+import { InicionComponent } from './paginas/inicion/inicion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    PokemonComponent,
+    InicionComponent
   ],
   imports: [
     BrowserModule,
