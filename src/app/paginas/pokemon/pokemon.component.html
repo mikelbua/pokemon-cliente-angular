@@ -3,14 +3,14 @@
         <div class="col  p-2 h-50">
         </div>
         <div class="col  p-2">
-            <p style="display: inline;">buscar </p><input type="search" class="form-control d-inline mr-2 w-75 p-3"placeholder="buscar por nombre"> 
+            <p style="display: inline;">buscar </p><input type="search" [(ngModel)]="busqueda" class="form-control d-inline mr-2 w-75 p-3"placeholder="buscar por nombre"> 
         </div>
     </div>
     <div class="row p-1">
         <div class="col-3 "> 
             <h3 class="text-warning">Pokemons</h3>
             <ul class="list-group">
-                <li *ngFor="let p of pokemons" class="list-group-item listaPokemons" (click)="detallePokemon(p)">
+                <li *ngFor="let p of pokemons | pokemonsFiltro : busqueda" class="list-group-item listaPokemons" (click)="detallePokemon(p)">
                     <p>{{p.nombre | titlecase}}</p>
                 </li>
             </ul>

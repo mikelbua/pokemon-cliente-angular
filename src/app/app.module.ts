@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PokemonComponent } from './paginas/pokemon/pokemon.component';
 import { InicionComponent } from './paginas/inicion/inicion.component';
+import { PokemonsFiltroPipe } from './pipes/pokemons-filtro.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     PokemonComponent,
-    InicionComponent
+    InicionComponent,
+    PokemonsFiltroPipe
   ],
   imports: [
     BrowserModule,
