@@ -1,23 +1,41 @@
-<h1 class="text-warning">Pokemon</h1>
-
-<div class="container border border-danger">
-    <div class="row border border-warning">
-        <div class="col border boder-primary">
-            <p style="display: inline;"></p><input type="search" class="form-control d-inline mr-2 w-75 p-3" [(ngModel)]="busqueda" placeholder="buscar por nombre">
+<div class="container  p-3">
+    <div class="row  p-1">
+        <div class="col  p-2 h-50">
         </div>
-        <div class="col border boder-primary">
-            
+        <div class="col  p-2">
+            <p style="display: inline;">buscar </p><input type="search" class="form-control d-inline mr-2 w-75 p-3"placeholder="buscar por nombre"> 
         </div>
     </div>
-    <div class="row border border-warning">
-        <div class="col border boder-primary">
-            <h3>Pokemons</h3>
+    <div class="row p-1">
+        <div class="col-3 "> 
+            <h3 class="text-warning">Pokemons</h3>
             <ul class="list-group">
-                <li *ngFor="let p of pokemons" class="list-group-item">
-                    <p>{{p.nombre}}</p>
+                <li *ngFor="let p of pokemons" class="list-group-item listaPokemons" (click)="detallePokemon(p)">
+                    <p>{{p.nombre | titlecase}}</p>
                 </li>
             </ul>
         </div>
-        <div class="col border boder-primary">detalle</div>
+        <div class="col-9 p-0 detallePokemon">            
+            <div class="col-12 nombreDetallePokemon">
+            <h3 class="pl-3 text-warning">{{pokemon.nombre | titlecase}}</h3>
+            </div>
+            <div class="row" style="width: 100%;">
+                <div class="col  p-2 ml-3">
+                    <div>
+                        <img class=" mt-2 imagenPokemon" src="{{pokemon.foto}}" alt="">
+                    </div>
+                </div>
+                
+                <div class="col p-2">
+                    <h5>Habilidades</h5>
+                    <ul class="list-group">
+                        <li *ngFor="let h of pokemon.habilidades" class="list-group-item listaPokemons">
+                            <p>{{h.nombre | titlecase}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+            
     </div>
 </div>
