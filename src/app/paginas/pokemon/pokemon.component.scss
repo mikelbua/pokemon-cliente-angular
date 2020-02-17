@@ -1,5 +1,5 @@
 
-$colorTodo : #fc791d;
+$colorTodo : #0475a1;
 
 .container
 {
@@ -23,6 +23,7 @@ $colorTodo : #fc791d;
 
 .listaPokemons:hover{
     background-color: $colorTodo;
+    color: rgb(255, 177, 9);
 
 }
 .nombreDetallePokemon {
