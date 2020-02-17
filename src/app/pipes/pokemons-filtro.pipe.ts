@@ -1,11 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Pokemon } from '../modelo/pokemon';
 
 @Pipe({
   name: 'pokemonsFiltro'
 })
 export class PokemonsFiltroPipe implements PipeTransform {
 
-  transform(pokemons: any, busqueda:string): any {
+  transform(pokemons: Array<Pokemon>, busqueda:string): any {
 
     console.debug(busqueda);
 
