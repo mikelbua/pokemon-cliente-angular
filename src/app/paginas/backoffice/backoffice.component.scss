@@ -1,0 +1,51 @@
+
+$colorTodo : #0475a1;
+
+.container
+{
+    min-height: 50rem;
+}
+
+.detallePokemon {
+    border: 1px solid $colorTodo;
+}
+.formTitulo{
+    width: 100%;
+    background-color: #0475a1;
+}
+
+.formStiky {
+    position: sticky;
+    top: 0;
+    margin-bottom: 20px;
+}
+ 
+
+.listaPokemons{
+
+    align-items: baseline;
+
+    &:hover{
+            background-color: $colorTodo;
+        color: rgb(255, 177, 9);
+    }
+}
+
+.nombreDetallePokemon {
+    color : white; 
+    width: 100%; 
+    border: 1px solid $colorTodo; 
+    background-color: $colorTodo;
+}
+
+.botonEliminar{
+    
+    width: 6vh;
+    height: 6vh;
+    display: inline;
+}
+
+
+  .pLista{
+      display: inline;
+  }

@@ -1,0 +1,56 @@
+
+<div class="container">
+    <div class="row  p-1">
+        <div class="col  p-2 h-50">
+            <i class="fas fa-plus-circle"></i><button class="btn btn-link" (click)="limpiarForm()" >Nuevo Pokemon</button>
+        </div>
+        <div class="col  p-2">
+            <p class="text-warning" style="display: inline;"> <b>Buscar </b> </p><input type="search" [(ngModel)]="busqueda" class="form-control d-inline mr-2 w-75 p-3"placeholder="buscar por nombre"> 
+        </div>
+    </div>
+    <div class="row p-1">
+        <div class="col-5 "> 
+            <h3 class="text-warning">Pokemons</h3>
+            <ul class="list-group">
+                <li *ngFor="let p of pokemons | pokemonsFiltro : busqueda"  class="list-group-item listaPokemons d-flex justify-content-between" (click)="detallePokemon(p)">
+                    <div style="display: inline;">{{p.id}} </div>
+                    <div> <p class="item pLista" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">{{p.nombre | titlecase}}</p></div>
+                   <div><button class="my-2 btn btn-block btn-danger botonEliminar" (click)="eliminarPokemon(p)"><i class="fas fa-trash-alt"></i></button></div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-7 p-0 detallePokemon">            
+            
+            <div class="formStiky">
+                <div class="col-12 formTitulo">
+                       <h3 class="text-warning">Formulario</h3>
+                </div>
+                <div style="margin: 20px;">
+                    <form [formGroup]="formulario" (ngSubmit)="enviar(formulario.value)">
+                        <div class="form-group justify-content-center">
+                            <label for="nombre">Id</label>
+                            <input class="form-control mt-2 mb-2"
+                                type="text" 
+                                placeholder="Id pokemon" 
+                                formControlName="id" disabled>
+
+                            <label for="nombre">Nombre</label>
+                            <input class="form-control mt-2 mb-2"
+                                type="text" 
+                                placeholder="nombre del pokemon" 
+                                formControlName="nombre">
+
+                            <small class="text-danger" *ngIf ="formulario.controls.nombre.invalid && formulario.controls.nombre.dirty"> Minimo 2 maximo 15</small>
+                            <br>
+                            <input class="my-2 btn btn-block btn-warning" 
+                                    type="submit" [disabled]="formulario.invalid" 
+                                    formControlName="boton"
+                                    value="Enviar">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+            
+    </div>
+</div>

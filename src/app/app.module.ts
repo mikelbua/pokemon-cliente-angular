@@ -10,6 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PokemonComponent } from './paginas/pokemon/pokemon.component';
 import { InicionComponent } from './paginas/inicion/inicion.component';
 import { PokemonsFiltroPipe } from './pipes/pokemons-filtro.pipe';
+import { BackofficeComponent } from './paginas/backoffice/backoffice.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PokemonsFiltroPipe } from './pipes/pokemons-filtro.pipe';
     NavbarComponent,
     PokemonComponent,
     InicionComponent,
-    PokemonsFiltroPipe
+    PokemonsFiltroPipe,
+    BackofficeComponent,
   ],
   imports: [
     BrowserModule,

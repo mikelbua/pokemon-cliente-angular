@@ -55,4 +55,4 @@ constructor(private PokemonService : PokemonService) {
     this.pokemon = p;
   }//detallePokemon
 
-}
+}//class

@@ -15,7 +15,7 @@ export class PokemonService implements IPokemonService{
 
   getAllPokemon(): Observable<any>{
     let url = 'http://localhost:8080/pokemon-rest/api/pokemon/';
-    console.trace('get :' + url);
+    console.trace('Get :' + url);
     return this.http.get(url);
 
   }//getAllPokemon
@@ -23,10 +23,17 @@ export class PokemonService implements IPokemonService{
   getPokemonByNombre(nombre : string): Observable<any>{
     let url = 'https://pokeapi.co/api/v2/pokemon/'+ nombre;
     //let url = 'http://localhost:8080/pokemon-rest/api/pokemon/?nombre='+ nombre;
-    console.trace('get :'+ url);
+    console.trace('Get :'+ url);
     return this.http.get(url);
 
   }//getPokemonByNombre
+
+  deleteById(id : number): Observable<any>{
+    let url = 'http://localhost:8080/pokemon-rest/api/pokemon/'+ id;
+    console.trace('Delete : ' + url);
+    return this.http.delete(url);
+
+  }//deleteById
   
 
 

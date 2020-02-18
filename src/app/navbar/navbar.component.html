@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-warning">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -10,7 +10,11 @@
           <a [routerLink]="['/']" routerLinkActive="router-link-active" class="nav-link">Inicio</a>
         </li>
         <li class="nav-item">             
-          <a [routerLink]="['/pokemon']" routerLinkActive="router-link-active" class="nav-link">Pokemon</a>
+          <a [routerLink]="['/pokemon']" routerLinkActive="router-link-active" class="nav-link">
+            <img style="width: 25px; height:25px;" src="https://img.icons8.com/carbon-copy/100/000000/pokeball.png">Pokemon</a>
+        </li>
+        <li class="nav-item">     
+          <a [routerLink]="['/backoffice']" routerLinkActive="router-link-active" class="nav-link"><i class="fas fa-user-shield"></i>   Backoffice-Pokemon</a>
         </li>
       </ul>  
     </div>
