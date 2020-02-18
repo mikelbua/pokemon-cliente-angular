@@ -11,6 +11,7 @@ import { PokemonComponent } from './paginas/pokemon/pokemon.component';
 import { InicionComponent } from './paginas/inicion/inicion.component';
 import { PokemonsFiltroPipe } from './pipes/pokemons-filtro.pipe';
 import { BackofficeComponent } from './paginas/backoffice/backoffice.component';
+import { MensajeComponent } from './paginas/mensaje/mensaje.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { BackofficeComponent } from './paginas/backoffice/backoffice.component';
     InicionComponent,
     PokemonsFiltroPipe,
     BackofficeComponent,
+    MensajeComponent,
   ],
   imports: [
     BrowserModule,
