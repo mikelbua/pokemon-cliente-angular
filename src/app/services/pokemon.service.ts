@@ -34,6 +34,10 @@ export class PokemonService implements IPokemonService{
     return this.http.delete(url);
 
   }//deleteById
+
+  create(){
+
+  }//create
   
 
 

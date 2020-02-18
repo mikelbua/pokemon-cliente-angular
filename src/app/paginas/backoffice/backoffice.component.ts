@@ -43,7 +43,7 @@ export class BackofficeComponent implements OnInit {
     //Definir lo Formcontrols == inputs [value,validaciones]
     id: [0],
     nombre : ['',[Validators.required , Validators.minLength(2) , Validators.maxLength(15)]],
-    
+    boton : ['Actualizar Pokemon']
     
     });
   }//construirform
@@ -64,7 +64,36 @@ export class BackofficeComponent implements OnInit {
     { 
       console.trace('Soy el metodo enviar del BackofficeComponent');
       console.trace('Enviar formulario %o', values);
-      const nombre = values.nombrePokemon;
+
+      let NomrePokemon = values.nombre;
+      let idPokemon =  values.id;
+
+      if(idPokemon === 0 )
+      {
+        console.trace('Soy el metodo eliminar Pokemon');
+      //llamadas a los sevicios.
+      //cuanodo llamamos a un observable tenemos tres posibles metodos 
+      //next,error y complete, SOLO UNO es OBLIGATORIO (next).
+      //a un observble nos tenemos que subscribir.
+      this.PokemonService.create(p.id).subscribe(
+        data => {
+          console.debug('peticion correcta data %o', data);
+          // mapear de Json a array de Pokemons
+          this.pokemon  = data;
+        },
+        error => {//metodo error de Observable (no obligatorio).
+          console.warn('peticion ERRONEA data %o', error);
+        },
+        () => {//metodo complete de Observable (no obligatorio).
+          console.trace('esto se hace siempre');
+        }
+      );
+      }
+      else{
+
+      }
+
+      this.getPokemos();
 
     }//enviar
 
@@ -125,7 +154,7 @@ export class BackofficeComponent implements OnInit {
       controlId.setValue(this.pokemon.id);
 
       let controlBoton = this.formulario.get('boton');
-      controlBoton.setValue('Actualica');
+      controlBoton.setValue('Actualizar Pokemon');
 
     };//detallePokemon
 
