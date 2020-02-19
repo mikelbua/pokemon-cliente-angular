@@ -44,8 +44,7 @@
                             <br>
                             <input class="my-2 btn btn-block btn-warning" 
                                     type="submit" [disabled]="formulario.invalid" 
-                                    formControlName="boton"
-                                    value="Enviar">
+                                    value="{{ (formulario.value.id === 0)? 'Crear':'Modificar' }}">
                         </div>
                     </form>
                 </div>
