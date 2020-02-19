@@ -68,8 +68,6 @@ export class BackofficeComponent implements OnInit {
       this.pokemon.id = idPokemon;
       this.pokemon.nombre = NombrePokemon;
 
-
-
       if(idPokemon === 0 )
       {
         console.trace('Soy el metodo Crear Pokemon');

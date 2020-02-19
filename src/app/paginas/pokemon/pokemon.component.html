@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="row p-1">
-        <div class="col-3 "> 
+        <div class="col-4 "> 
             <h3 class="text-warning">Pokemons</h3>
             <ul class="list-group">
                 <li *ngFor="let p of pokemons | pokemonsFiltro : busqueda" class="list-group-item listaPokemons" (click)="detallePokemon(p)">
@@ -15,21 +15,23 @@
                 </li>
             </ul>
         </div>
-        <div class="col-9 p-0 detallePokemon">            
-            <div class="col-12 nombreDetallePokemon" *ngIf="pokemon">
-            <h3 class="pl-3 text-warning">{{pokemon.nombre | titlecase}}</h3>
-            </div>
-            <div class="row" style="width: 100%;">
-                
-                <div class="col p-5">
-                    <h5>Habilidades</h5>
-                    <ul class="list-group">
-                        <li *ngFor="let h of pokemon.habilidades" class="list-group-item">
-                            <p>{{h.nombre | titlecase}}</p>
-                        </li>
-                    </ul>
+        <div class="col-8 p-0 detallePokemon bg-warning">      
+            <div  style="position: sticky; top: 0;">  
+                <div class="col-12 nombreDetallePokemon" *ngIf="pokemon">
+                    <h3 class="pl-3 text-warning">{{pokemon.nombre | titlecase}}</h3>
                 </div>
-            </div>
+                <div class="row" style="width: 100%;">
+                    
+                    <div class="col p-5">
+                        <h5>Habilidades</h5>
+                        <ul class="list-group">
+                            <li *ngFor="let h of pokemon.habilidades" class="list-group-item">
+                                <p>{{h.nombre | titlecase}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div> 
         </div>
             
     </div>
