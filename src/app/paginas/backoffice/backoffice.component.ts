@@ -38,14 +38,14 @@ export class BackofficeComponent implements OnInit {
   }//init
 
   private construirform(){
-    this.formulario = this.builder.group({
-
-    //Definir lo Formcontrols == inputs [value,validaciones]
-    id: [0],
-    nombre : ['',[Validators.required , Validators.minLength(2) , Validators.maxLength(15)]],
-    
-    
-    });
+    this.formulario = this.builder.group(
+                    {
+                      //Definir lo Formcontrols == inputs [value,validaciones]
+                      id: [0],
+                      nombre : ['',[Validators.required , Validators.minLength(2) , Validators.maxLength(15)]],
+                      
+                      
+                    });
   }//construirform
 
   limpiarForm(){
@@ -106,12 +106,11 @@ export class BackofficeComponent implements OnInit {
         );
       }
 
-      
-
     }//enviar
 
-    eliminarPokemon(p : any){
+    eliminarPokemon(event: Event , p: any){
       console.trace('Soy el metodo eliminar Pokemon');
+      event.stopPropagation();
       //llamadas a los sevicios.
       //cuanodo llamamos a un observable tenemos tres posibles metodos 
       //next,error y complete, SOLO UNO es OBLIGATORIO (next).
@@ -131,6 +130,7 @@ export class BackofficeComponent implements OnInit {
         }
       );
       this.getPokemos();
+      this.limpiarForm();
     }//eliminarPokemon
 
     /**

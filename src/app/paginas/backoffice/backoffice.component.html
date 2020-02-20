@@ -13,9 +13,9 @@
             <h3 class="text-warning">Pokemons</h3>
             <ul class="list-group">
                 <li *ngFor="let p of pokemons | pokemonsFiltro : busqueda"  class="list-group-item listaPokemons d-flex justify-content-between" (click)="detallePokemon(p)">
-                    <div style="display: inline;">{{p.id}} </div>
-                    <div> <p class="item pLista" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">{{p.nombre | titlecase}}</p></div>
-                   <div><button class="my-2 btn btn-block btn-danger botonEliminar" (click)="eliminarPokemon(p)"><i class="fas fa-trash-alt"></i></button></div>
+                    <div style="display: inline;"><b>{{p.id}} </b></div>
+                    <div> <p class="item pLista"> <b> {{p.nombre | titlecase}}</b></p></div>
+                   <div><button class="my-2 btn btn-block btn-danger botonEliminar" (click)="eliminarPokemon($event,p)"><i class="fas fa-trash-alt"></i></button></div>
                 </li>
             </ul>
         </div>
