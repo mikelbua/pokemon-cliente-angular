@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Pokemon } from 'src/app/modelo/pokemon';
 import { Habilidad } from 'src/app/modelo/habilidad';
 import { PokemonService } from 'src/app/services/pokemon.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HabilidadService } from 'src/app/services/habilidad.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-backoffice',
@@ -16,11 +17,12 @@ export class BackofficeComponent implements OnInit {
   busqueda : string;
   pokemons : Array<Pokemon>
   pokemon : Pokemon;
-  habilidades:Habilidad;
   nombrePokemon : string;
-  todaHabilidades : Array<Habilidad>
+  todasHabilidades : Array<Habilidad>
+  habilidadesCheck : Array<any>
 
   formulario : FormGroup;
+  formHabilidades: FormArray;
 
   constructor(private PokemonService : PokemonService,
               private HabilidadService : HabilidadService,
@@ -43,13 +45,43 @@ export class BackofficeComponent implements OnInit {
 
   private construirform(){
     this.formulario = this.builder.group(
-                    {
-                      //Definir lo Formcontrols == inputs [value,validaciones]
-                      id: [0],
-                      nombre : ['',[Validators.required , Validators.minLength(2) , Validators.maxLength(15)]],
-                      
-                    });
+                                        {
+                                          //Definir lo Formcontrols == inputs [value,validaciones]
+                                          id: [0],
+                                          nombre : ['',[Validators.required , Validators.minLength(2) , Validators.maxLength(15)]],
+                                          habiliades : this.builder.array([])
+                                        });
+    //metemos las habilidades seleccionadas (habilidades) el un FormArray (formHabilidades) declarado arriba
+    this.formHabilidades = this.formulario.get('habiliades') as FormArray;
   }//construirform
+
+  private crearFormGroupHabilidad(): FormGroup {
+    return this.builder.group({
+              id: new FormControl(0),
+              nombre: new FormControl('')
+            });
+  }//crearFormGroupHabilidad
+
+  checkCambiado( h: any ) {
+
+    h.checked = !h.checked; 
+    console.debug('checkCambiado %o', h);
+
+    const habilidad = this.crearFormGroupHabilidad();
+    habilidad.get('id').setValue( h.id );
+    habilidad.get('nombre').setValue( h.nombre );
+
+    
+    //this.formHabilidades = this.formHabilidades.get('habilidad') as FormArray;
+    //const valueHabilidades = this.formHabilidades.value;
+
+    
+    this.formHabilidades.push(habilidad);
+    
+
+    
+
+  }// checkCambiado
 
   limpiarForm(){
       let controlNombre = this.formulario.get('nombre');
@@ -173,7 +205,7 @@ export class BackofficeComponent implements OnInit {
         data => {
           console.debug('peticion correcta data %o', data);
           // mapear de Json a array de Pokemons
-          this.todaHabilidades  = data;
+          this.todasHabilidades  = data;
         },
         error => {//metodo error de Observable (no obligatorio).
           console.warn('peticion ERRONEA data %o', error);

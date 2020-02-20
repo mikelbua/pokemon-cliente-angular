@@ -1,4 +1,5 @@
-
+{{ formulario.value | json }}<br>
+{{ formulario.status | json }}
 <div class="container">
     <div class="row  p-1">
         <div class="col  p-2 h-50">
@@ -26,7 +27,7 @@
                        <h3 class="text-warning">Formulario</h3>
                 </div>
                 <div class="divForm">
-                    <form [formGroup]="formulario" (ngSubmit)="enviar(formulario.value)">
+                    <form [formGroup]="formulario" id="formularioPokemon" (ngSubmit)="enviar(formulario.value)">
                         <div class="form-group justify-content-center">
                             <label for="nombre">Id</label>
                             <input class="form-control mt-2 mb-2"
@@ -40,22 +41,28 @@
                                 placeholder="nombre del pokemon" 
                                 formControlName="nombre">
 
-                            <small class="text-danger" *ngIf ="formulario.controls.nombre.invalid && formulario.controls.nombre.dirty"> Minimo 2 maximo 15</small>
+                            <small class="text-danger" *ngIf ="formulario.controls.nombre.invalid && formulario.controls.nombre.dirty"> Minimo 2 maximo 15 caracteres</small>
                             <br>
-                            <input class="my-2 btn btn-block btn-warning" 
-                                    type="submit" [disabled]="formulario.invalid" 
-                                    value="{{ (formulario.value.id === 0)? 'Crear':'Modificar' }}">
+                            
                         </div>
                     </form>
-                    <ul class="list-group" >
+                    <ul class="list-group mb-2" >
                         <div class="container">
                             <div class="row">
-                                <div class="col-xs-12 col-md-6 col-xl-4"  *ngFor="let h of todaHabilidades">
-                                    <input type="checkbox" id="{{h.id}}" value=""> {{h.nombre | titlecase}}
+                                <div class="col-xs-12 col-md-6 col-xl-4"  *ngFor="let h of todasHabilidades">
+                                    
+                                    <input type="checkbox"
+                                            name="todasHabilidades"
+                                            (change)="checkCambiado(h)"
+                                            value="{{h.id}}"
+                                            />{{h.nombre | titlecase}}
                                 </div>
                             </div>
                       </div>
                     </ul>
+                    <input class="my-2 mt-2 btn btn-block btn-warning" 
+                                    type="submit" form="formularioPokemon" [disabled]="formulario.invalid" 
+                                    value="{{ (formulario.value.id === 0)? 'Crear':'Modificar' }}">
                 </div>
             </div>
         </div>
