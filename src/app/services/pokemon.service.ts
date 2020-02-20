@@ -11,7 +11,7 @@ export class PokemonService implements IPokemonService{
 
   constructor(private http: HttpClient) {
     console.trace('PokemonService constructor');
-  }
+  }//constructor
 
   getAllPokemon(): Observable<any>{
     let url = 'http://localhost:8080/pokemon-rest/api/pokemon/';

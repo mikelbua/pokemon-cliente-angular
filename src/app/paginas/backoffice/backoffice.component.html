@@ -9,9 +9,9 @@
         </div>
     </div>
     <div class="row p-1">
-        <div class="col-5 "> 
+        <div class="col-xl-5 col-md-3"> 
             <h3 class="text-warning">Pokemons</h3>
-            <ul class="list-group">
+            <ul class="list-group pb-2" >
                 <li *ngFor="let p of pokemons | pokemonsFiltro : busqueda"  class="list-group-item listaPokemons d-flex justify-content-between" (click)="detallePokemon(p)">
                     <div style="display: inline;"><b>{{p.id}} </b></div>
                     <div> <p class="item pLista"> <b> {{p.nombre | titlecase}}</b></p></div>
@@ -19,7 +19,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-7 p-0 detallePokemon rounded">            
+        <div class="col-xl-7 col-md-9 p-0 detallePokemon rounded">            
             
             <div class="formStiky">
                 <div class="col-12 formTitulo">
@@ -47,6 +47,15 @@
                                     value="{{ (formulario.value.id === 0)? 'Crear':'Modificar' }}">
                         </div>
                     </form>
+                    <ul class="list-group" >
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 col-xl-4"  *ngFor="let h of todaHabilidades">
+                                    <input type="checkbox" id="{{h.id}}" value=""> {{h.nombre | titlecase}}
+                                </div>
+                            </div>
+                      </div>
+                    </ul>
                 </div>
             </div>
         </div>

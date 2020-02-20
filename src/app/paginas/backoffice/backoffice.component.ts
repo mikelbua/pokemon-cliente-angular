@@ -4,6 +4,7 @@ import { Habilidad } from 'src/app/modelo/habilidad';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HabilidadService } from 'src/app/services/habilidad.service';
 
 @Component({
   selector: 'app-backoffice',
@@ -17,10 +18,12 @@ export class BackofficeComponent implements OnInit {
   pokemon : Pokemon;
   habilidades:Habilidad;
   nombrePokemon : string;
+  todaHabilidades : Array<Habilidad>
 
   formulario : FormGroup;
 
   constructor(private PokemonService : PokemonService,
+              private HabilidadService : HabilidadService,
               private router : Router , 
               private builder : FormBuilder,) { 
 
@@ -35,6 +38,7 @@ export class BackofficeComponent implements OnInit {
     console.trace('BackofficeComponent init');
 
     this.getPokemos();
+    this.getHabilidades();
   }//init
 
   private construirform(){
@@ -147,6 +151,27 @@ export class BackofficeComponent implements OnInit {
           // mapear de Json a array de Pokemons
           this.pokemons  = data;
           this.pokemon = this.pokemons[0];
+        },
+        error => {//metodo error de Observable (no obligatorio).
+          console.warn('peticion ERRONEA data %o', error);
+        },
+        () => {//metodo complete de Observable (no obligatorio).
+          console.trace('esto se hace siempre');
+        }
+      );
+
+    }//getPokemons
+
+    getHabilidades(){
+      //llamadas a los sevicios.
+      //cuanodo llamamos a un observable tenemos tres posibles metodos 
+      //next,error y complete, SOLO UNO es OBLIGATORIO (next).
+      //a un observble nos tenemos que subscribir.
+      this.HabilidadService.getAllHabilidad().subscribe(
+        data => {
+          console.debug('peticion correcta data %o', data);
+          // mapear de Json a array de Pokemons
+          this.todaHabilidades  = data;
         },
         error => {//metodo error de Observable (no obligatorio).
           console.warn('peticion ERRONEA data %o', error);
