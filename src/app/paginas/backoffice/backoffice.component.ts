@@ -48,7 +48,6 @@ export class BackofficeComponent implements OnInit {
                       id: [0],
                       nombre : ['',[Validators.required , Validators.minLength(2) , Validators.maxLength(15)]],
                       
-                      
                     });
   }//construirform
 
@@ -63,20 +62,23 @@ export class BackofficeComponent implements OnInit {
 
   enviar(values : any)
     { 
+      //debugger;
       console.trace('Soy el metodo enviar del BackofficeComponent');
       console.trace('Enviar formulario %o', values);
 
+      
       let NombrePokemon = values.nombre;
       let idPokemon =  values.id;
+      let poNuevo = new Pokemon();
 
-      this.pokemon.id = idPokemon;
-      this.pokemon.nombre = NombrePokemon;
+      poNuevo.id = idPokemon;
+      poNuevo.nombre = NombrePokemon;
 
       if(idPokemon === 0 )
       {
         console.trace('Soy el metodo Crear Pokemon');
         
-        this.PokemonService.create(this.pokemon).subscribe(
+        this.PokemonService.create(poNuevo).subscribe(
           data => {
             console.debug('peticion correcta data %o', data);
             // mapear de Json a array de Pokemons
@@ -94,7 +96,7 @@ export class BackofficeComponent implements OnInit {
       else{
           console.trace('Soy el metodo update Pokemon');
         
-          this.PokemonService.updateById(this.pokemon).subscribe(
+          this.PokemonService.updateById(poNuevo).subscribe(
           data => {
             console.debug('peticion correcta data %o', data);
             // mapear de Json a array de Pokemons
