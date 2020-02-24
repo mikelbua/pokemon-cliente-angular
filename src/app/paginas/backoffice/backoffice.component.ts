@@ -40,9 +40,13 @@ export class BackofficeComponent implements OnInit {
 
   ngOnInit() {
     console.trace('BackofficeComponent init');
-
+    
+    
     this.getPokemos();
     this.getHabilidades();
+    
+  
+
   }//init
 
   private construirform(){
@@ -66,7 +70,7 @@ export class BackofficeComponent implements OnInit {
 
   checkCambiado( h: any ) {
 
-    h.checked = !h.checked; 
+    
     console.debug('checkCambiado %o', h);
 
     if(h.checked) {
@@ -210,6 +214,13 @@ export class BackofficeComponent implements OnInit {
           console.debug('peticion correcta data %o', data);
           // mapear de Json a array de Pokemons
           this.todasHabilidades  = data;
+          this.habilidadesCheck = this.todasHabilidades.map(el=> {
+            return {
+              id: el.id,
+              nombre: el.nombre,
+              checked : false
+            }
+          });
         },
         error => {//metodo error de Observable (no obligatorio).
           console.warn('peticion ERRONEA data %o', error);
@@ -226,13 +237,32 @@ export class BackofficeComponent implements OnInit {
       
       let controlNombre = this.formulario.get('nombre');
       controlNombre.setValue(this.pokemon.nombre);
-
+      
       let controlId = this.formulario.get('id');
       controlId.setValue(this.pokemon.id);
 
-      let h = this.formulario.get('habiliades');
-      h.setValue(this.pokemon.habilidades);
+      this.habilidadesCheck.forEach(element => {
+        element.checked = this.pokemon.habilidades.some(h => h.id === element.id)
+      });
 
+     
+      this.formHabilidades.clear();
+
+      this.pokemon.habilidades.forEach(el =>{
+        const habilidad = this.crearFormGroupHabilidad();
+        habilidad.get('id').setValue( el.id );
+        habilidad.get('nombre').setValue( el.nombre );
+            
+      this.formHabilidades.push(habilidad);
+
+        
+
+      });
+
+
+
+      
+      
     };//detallePokemon
     
   

@@ -1,6 +1,6 @@
 {{ formulario.value | json }}<br>
-
-{{ formulario.status | json }}
+{{ formulario.status | json }}<br>
+{{ habilidadesCheck | json}}
 <div class="container">
     <div class="row  p-1">
         <div class="col  p-2 h-50">
@@ -51,12 +51,13 @@
                     <ul class="list-group mb-2" >
                         <div class="container">
                             <div class="row">
-                                <div class="col-xs-12 col-md-6 col-xl-4"  *ngFor="let h of todasHabilidades">
+                                <div class="col-xs-12 col-md-6 col-xl-4"  *ngFor="let h of habilidadesCheck">
                                     
                                     <input type="checkbox"
                                             name="todasHabilidades"
                                             (change)="checkCambiado(h)"
                                             value="{{h.id}}"
+                                            [(ngModel)]="h.checked"
                                             
                                             />{{h.nombre | titlecase}}
                                 </div>
@@ -67,6 +68,7 @@
                                     type="submit" form="formularioPokemon" [disabled]="formulario.invalid" 
                                     value="{{ (formulario.value.id === 0)? 'Crear':'Modificar' }}">
                 </div>
+                
             </div>
         </div>
     </div>
