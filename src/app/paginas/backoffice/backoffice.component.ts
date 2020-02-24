@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Pokemon } from 'src/app/modelo/pokemon';
 import { Habilidad } from 'src/app/modelo/habilidad';
 import { PokemonService } from 'src/app/services/pokemon.service';
-import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl, Form } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HabilidadService } from 'src/app/services/habilidad.service';
 import { combineLatest } from 'rxjs';
@@ -17,6 +17,8 @@ export class BackofficeComponent implements OnInit {
   busqueda : string;
   pokemons : Array<Pokemon>
   pokemon : Pokemon;
+  arrayPrueba : Array<any>;
+  
   nombrePokemon : string;
   todasHabilidades : Array<Habilidad>
   habilidadesCheck : Array<any>
@@ -67,20 +69,18 @@ export class BackofficeComponent implements OnInit {
     h.checked = !h.checked; 
     console.debug('checkCambiado %o', h);
 
-    const habilidad = this.crearFormGroupHabilidad();
-    habilidad.get('id').setValue( h.id );
-    habilidad.get('nombre').setValue( h.nombre );
+    if(h.checked) {
+      const habilidad = this.crearFormGroupHabilidad();
+      habilidad.get('id').setValue( h.id );
+      habilidad.get('nombre').setValue( h.nombre );
+            
+      this.formHabilidades.push(habilidad);
 
-    
-    //this.formHabilidades = this.formHabilidades.get('habilidad') as FormArray;
-    //const valueHabilidades = this.formHabilidades.value;
-
-    
-    this.formHabilidades.push(habilidad);
-    
-
-    
-
+    } else {
+      console.trace('Aqui borrara la habilidad del array al DESchechear')
+      //esta linea borrara la habilidad de arrray formHabilidades cuando DEScheckeamos
+      this.formHabilidades.removeAt(this.formHabilidades.value.findIndex(el => el.id === h.id));
+    }
   }// checkCambiado
 
   limpiarForm(){
@@ -105,7 +105,8 @@ export class BackofficeComponent implements OnInit {
 
       poNuevo.id = idPokemon;
       poNuevo.nombre = NombrePokemon;
-
+      poNuevo.habilidades = this.formHabilidades.value;
+      
       if(idPokemon === 0 )
       {
         console.trace('Soy el metodo Crear Pokemon');
@@ -115,6 +116,7 @@ export class BackofficeComponent implements OnInit {
             console.debug('peticion correcta data %o', data);
             // mapear de Json a array de Pokemons
             this.pokemon  = data;
+            
             this.getPokemos();
           },
           error => {//metodo error de Observable (no obligatorio).
@@ -185,6 +187,8 @@ export class BackofficeComponent implements OnInit {
           // mapear de Json a array de Pokemons
           this.pokemons  = data;
           this.pokemon = this.pokemons[0];
+          
+          
         },
         error => {//metodo error de Observable (no obligatorio).
           console.warn('peticion ERRONEA data %o', error);
@@ -219,15 +223,18 @@ export class BackofficeComponent implements OnInit {
 
     detallePokemon(p:any){
       this.pokemon = p;
-
+      
       let controlNombre = this.formulario.get('nombre');
       controlNombre.setValue(this.pokemon.nombre);
 
       let controlId = this.formulario.get('id');
       controlId.setValue(this.pokemon.id);
 
+      let h = this.formulario.get('habiliades');
+      h.setValue(this.pokemon.habilidades);
+
     };//detallePokemon
-
-
+    
+  
 
 }//class

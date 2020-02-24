@@ -29,6 +29,7 @@ export class PokemonService implements IPokemonService{
   create(pokemon : Pokemon): Observable<any>{
     let url = "http://localhost:8080/pokemon-rest/api/pokemon/";
     console.trace('POST : ' + url);
+    
     return this.http.post(url,pokemon);
   }//create
 
