@@ -93,6 +93,11 @@ export class BackofficeComponent implements OnInit {
       
       let controlId = this.formulario.get('id');
       controlId.setValue(0);
+
+      this.formHabilidades.clear();
+      this.habilidadesCheck.forEach(element => {
+        element.checked = false;
+      });
       
   }//limpiarForm
 
@@ -249,9 +254,9 @@ export class BackofficeComponent implements OnInit {
       this.formHabilidades.clear();
 
       this.pokemon.habilidades.forEach(el =>{
-        const habilidad = this.crearFormGroupHabilidad();
-        habilidad.get('id').setValue( el.id );
-        habilidad.get('nombre').setValue( el.nombre );
+      const habilidad = this.crearFormGroupHabilidad();
+      habilidad.get('id').setValue( el.id );
+      habilidad.get('nombre').setValue( el.nombre );
             
       this.formHabilidades.push(habilidad);
 
@@ -260,9 +265,6 @@ export class BackofficeComponent implements OnInit {
       });
 
 
-
-      
-      
     };//detallePokemon
     
   
